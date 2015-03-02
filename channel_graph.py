@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 freq = {'5GHz': '5', '2GHz': '2'}
 
 def channel_graph(search_frequency):
-    os.system("iwlist wlan0 scan > wifi_details.txt")
+    #os.system("iwlist wlan0 scan > wifi_details.txt")
     os.system('cat wifi_details.txt | grep -w "(Channel" > wifi_channels.txt')
     channel_info = open("wifi_channels.txt", "r")
     list = []
@@ -35,9 +35,9 @@ def main():
         sys.exit(1)
         
     if(sys.argv[1] == "2GHz"):
-        channel_graph(freq['5GHz'])
-    elif(sys.argv[1] == "5GHz"):
         channel_graph(freq['2GHz'])
+    elif(sys.argv[1] == "5GHz"):
+        channel_graph(freq['5GHz'])
     else:
         print("Frequency variable can only be 2GHz or 5GHz")
         print("Example: channel_graph.py 2GHz")
