@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 freq = {'5GHz': '5', '2GHz': '2'}
 
 def channel_graph(search_frequency):
-    #os.system("iwlist wlan0 scan > wifi_details.txt")
+    os.system("iwlist wlan0 scan > wifi_details.txt")
     os.system('cat wifi_details.txt | grep -w "(Channel" > wifi_channels.txt')
     channel_info = open("wifi_channels.txt", "r")
     list = []
@@ -22,7 +22,7 @@ def channel_graph(search_frequency):
                     list.append(int(channel))
                     print("channel = {}".format(list[len(list) - 1]))
     
-    plt.hist(list)
+    plt.hist(list, max(list) - min(list))
     plt.xlabel("Channels in {} GHz".format(search_frequency))
     plt.ylabel("# networks")
     plt.show()    
