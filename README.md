@@ -1,4 +1,4 @@
-#proxy_emulator
+#channel_graph
 ------------
 This repository is created to observe histogram of active 
 networks in Wi-Fi band. Script is written in **_python_**.   
