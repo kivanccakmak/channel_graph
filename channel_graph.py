@@ -30,9 +30,9 @@ def channel_graph(search_frequency):
                 band = band[band.find(':')+1]
                 if band == search_frequency:
                     chan_list.append(int(channel))
-                    print "channel = {}".format(list[len(list) - 1])
+                    print "channel = {}".format(list[len(chan_list) - 1])
 
-    plt.hist(list, max(list) - min(list))
+    plt.hist(chan_list, max(chan_list) - min(chan_list))
     plt.xlabel("Channels in {} GHz".format(search_frequency))
     plt.ylabel("# networks")
     plt.show()
