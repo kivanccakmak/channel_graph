@@ -1,36 +1,33 @@
 #!/usr/bin/python
 import sys
+import subprocess
 import os
 import matplotlib.pyplot as plt
 
 FREQ = {'5GHz': '5', '2GHz': '2'}
-FILE_NAME = "wifi_detals.txt"
-SCAN_CMD = "iwlist wlan0 scan > {f_name}.txt"
-SCAN_CMD = SCAN_CMD.format(f_name=FILE_NAME)
-GREP_CMD = 'cat {f_name} | grep -w ("Channel"' +\
-        ' > {f_name}'
-GREP_CMD = GREP_CMD.format(f_name=FILE_NAME)
+INTERFACE = "wlan0"
+SCAN_CMD = 'iwlist {interf} | grep -w ("Channel"'
+SCAN_CMD = SCAN_CMD.format(interf=INTERFACE)
 
 def channel_graph(search_frequency):
     """ plots network histogram
     :search_frequency: str
         '5GHz or 2GHZ'
     """
-    os.system(SCAN_CMD)
-    os.system(GREP_CMD)
     chan_list = []
+    proc = subprocess.Popen([SCAN_CMD], stdout=subprocess.PIPE,
+            shell=True)
+    (out, err) = proc.communicate()
+    lines = out.split('\n')
 
-    with open("wifi_channels.txt") as f_ptr:
-        for lines in f_ptr:
-            line = lines.split()
-            if len(line) == 4:
-                channel = line[len(line) - 1]
-                channel = channel[0:len(channel)-1]
-                band = line[0]
-                band = band[band.find(':')+1]
-                if band == search_frequency:
-                    chan_list.append(int(channel))
-                    print "channel = {}".format(list[len(chan_list) - 1])
+    for line in lines:
+        if len(line) == 4:
+            channel = line[len(line) - 1]
+            channel = channel[0:len(channel)-1]
+            band = line[0]
+            band = band[band.find(':')+1]
+            if band == search_frequency:
+                chan_list.append(int(channel))
 
     plt.hist(chan_list, max(chan_list) - min(chan_list))
     plt.xlabel("Channels in {} GHz".format(search_frequency))
