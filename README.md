@@ -3,6 +3,11 @@
 This repository is created to observe histogram of active 
 networks in Wi-Fi band. Script is written in **_python_**.   
 
+##Dependencies
+```
+sudo apt-get install python-matplotlib
+```
+
 Usage:
 ```
 python channel_graph.py <frequency>
@@ -13,6 +18,7 @@ Examples:
 python channel_graph.py 2GHz
 python channel_graph.py 5GHz
 ```
+
 In order to observe networks in detail, I used **_iwlist wlan0 scan_** command with 
 Python's **_subprocess_** library. Then, parsed this information via **_grep_** command and remained
 script in channel_graph.py  
