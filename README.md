@@ -14,12 +14,12 @@ python channel_graph.py 2GHz
 python channel_graph.py 5GHz
 ```
 In order to observe networks in detail, I used **_iwlist wlan0 scan_** command with 
-Python's **_os_** library. Then, parsed this information via **_grep_** command and remained
+Python's **_subprocess_** library. Then, parsed this information via **_grep_** command and remained
 script in channel_graph.py  
 
 ```
-os.system("iwlist wlan0 scan > wifi_details.txt")
-os.system('cat wifi\_details.txt | grep -w "(Channel" > wifi_channels.txt')
+cmd = 'iwlist wlan0 scan | grep -w "(Channel"'
+proc = subprocess.Popen([cmd], stdout=subprocess.PIPE, shell=True)
 ```
 Consequently, I used **__pyplot__** framework to plot histogram, 
 which uses same syntax with **__MATLAB__**.
