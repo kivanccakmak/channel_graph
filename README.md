@@ -24,6 +24,7 @@ os.system('cat wifi\_details.txt | grep -w "(Channel" > wifi_channels.txt')
 Consequently, I used **__pyplot__** framework to plot histogram, 
 which uses same syntax with **__MATLAB__**.
 
- 
+##Screenshot 
+![](img/histogram.png)
 
   
