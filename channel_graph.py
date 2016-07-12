@@ -34,25 +34,30 @@ def channel_graph(search_frequency):
     plt.ylabel("# networks")
     plt.show()
 
-def main():
-    """
-    main to run from console
+def usage():
+    """prints usage message, exits
     """
     if len(sys.argv) != 2:
         print "Usage: {} <Channel> ".format(sys.argv[0])
         print "Example: channel_graph.py 2GHz"
         print "Example: channel_graph.py 5GHz"
-        sys.exit(1)
+    else:
+        print "Frequency variable can only be 2GHz or 5GHz"
+        print "Example: channel_graph.py 2GHz"
+        print "Example: channel_graph.py 5GHz"
+    sys.exit(1)
+
+def main():
+    """main"""
+    if len(sys.argv) != 2:
+        usage()
 
     if sys.argv[1] == "2GHz":
         channel_graph(FREQ['2GHz'])
     elif sys.argv[1] == "5GHz":
         channel_graph(FREQ['5GHz'])
     else:
-        print "Frequency variable can only be 2GHz or 5GHz"
-        print "Example: channel_graph.py 2GHz"
-        print "Example: channel_graph.py 5GHz"
-        sys.exit(1)
+        usage()
 
 if __name__ == "__main__":
     main()
